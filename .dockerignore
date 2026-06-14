@@ -38,6 +38,7 @@ htmlcov/
 .DS_Store
 
 # Other
+.env
 *.egg-info/
 .eggs/
 build/

@@ -14,7 +14,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy ETL scripts and data folders
 COPY src ./src
 COPY dataset ./dataset
-COPY .env ./
 
 # Default command (example: run ETL only)
 CMD ["python", "-m", "src.etl"]
