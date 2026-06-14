@@ -21,6 +21,11 @@ yanki-window-functions/
 │   ├── note.md
 │   └── requirements.md
 ├── doc/
+│   └── erd.png
+├── src/
+│   └── etl.py                # Main ETL logic (production code)
+├── tests/
+│   └── test_etl.py           # Automated tests for ETL
 ├── tasks/
 │   ├── question-1.md
 │   ├── question-2.md
@@ -29,6 +34,9 @@ yanki-window-functions/
 ├── windowcase_ENV/           # Python virtual environment
 ├── yanki.ipynb               # Main Jupyter notebook
 ├── requirements.txt          # Python dependencies
+├── Dockerfile
+├── docker-compose.yml
+├── .env.example
 └── README.md
 ```
 
@@ -72,7 +80,9 @@ Open `yanki.ipynb` in Jupyter and execute the cells in order:
 
 ## File Descriptions
 
-- `yanki.ipynb`: Main notebook with all ETL logic, analytics, and window function examples
+- `src/etl.py`: Main ETL logic (cleaning, normalization, logging)
+- `tests/test_etl.py`: Automated tests for ETL pipeline
+- `yanki.ipynb`: Notebook for exploration and analytics
 - `dataset/rawdata/yanki_ecommerce.csv`: Raw input data
 - `dataset/cleandata/`: Cleaned, normalized CSVs for each table
 - `requirements.txt`: Python dependencies
@@ -86,7 +96,44 @@ Open `yanki.ipynb` in Jupyter and execute the cells in order:
 - All data processing and analytics are performed in pandas (no database required).
 - Use the provided tasks and solutions to practice window function concepts in pandas.
 
-## Data Model
+## Production Readiness
+
+This project is now production ready with the following features:
+
+- Automated data validation and schema checks (`validate_data.py`)
+- Automated tests for data files and columns (`tests/test_etl.py` with pytest)
+- Error handling and logging in the notebook and scripts (`safe_read_csv`)
+- Continuous Integration (CI) workflow with GitHub Actions (`.github/workflows/ci.yml`)
+- Modular code in `src/` and tests in `tests/`
+
+### How to Run Production Checks
+
+1. **Validate Data Files and Columns**
+
+   ```sh
+   python validate_data.py
+   ```
+
+2. **Run Automated Tests**
+
+   ```sh
+   pytest
+   ```
+
+3. **CI Pipeline**
+
+   On every push or pull request to `main`, the CI workflow will:
+   - Validate data files and columns
+   - Run all tests
+
+### Production Checklist
+
+- [x] Data validation for all input files and columns
+- [x] Automated tests for data presence and schema
+- [x] Error handling and logging in code
+- [x] CI pipeline for automated checks
+- [x] Modular src/ and tests/ structure
+- [x] Clear documentation for setup and usage
 
 The data model consists of five main tables (as CSVs):
 
